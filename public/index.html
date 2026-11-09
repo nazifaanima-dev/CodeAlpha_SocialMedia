@@ -1,0 +1,572 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10131f">
+  <title>Heyo — Connect. Share. Discover.</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a class="brand" href="/">
+      <span class="brand-icon">H</span>
+      <span>Heyo<span class="brand-dot">.</span></span>
+    </a>
+
+    <div class="sidebar-menu">
+      <a href="/" class="nav-item active">
+        <span>⌂</span> Home
+      </a>
+      <a href="#feed" class="nav-item">
+        <span>◉</span> Explore
+      </a>
+      <button class="nav-item" id="create-post-nav">
+        <span>＋</span> Create Post
+      </button>
+      <button class="nav-item" id="profile-nav">
+        <span>♙</span> My Profile
+      </button>
+    </div>
+
+    <div class="sidebar-bottom">
+      <div class="sidebar-note">
+        <div class="note-icon">✦</div>
+        <h3>Your space. Your people.</h3>
+        <p>Share moments, discover people and stay connected.</p>
+      </div>
+      <div class="sidebar-footer">© 2026 Heyo Social</div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <header class="topbar">
+      <div>
+        <p class="topbar-label">YOUR SOCIAL SPACE</p>
+        <h1>Good to see you <span>👋</span></h1>
+      </div>
+
+      <div class="topbar-actions">
+        <button class="icon-button" id="search-toggle" aria-label="Search">⌕</button>
+        <button class="icon-button notification-button" aria-label="Notifications">♧</button>
+        <button class="profile-button" id="header-profile">
+          <span id="header-avatar">H</span>
+          <span id="header-username">Guest</span>
+          <span>⌄</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- SEARCH -->
+    <div class="search-bar" id="search-area" hidden>
+      <input id="search-input" placeholder="Search posts or people...">
+      <button id="search-button">Search</button>
+    </div>
+
+    <!-- WELCOME BANNER -->
+    <section class="welcome-banner">
+      <div class="welcome-content">
+        <span class="welcome-tag">WELCOME TO HEYO</span>
+        <h2>Make connections.<br><span>Share your world.</span></h2>
+        <p>A place to express yourself, discover new people and share what matters.</p>
+        <button class="banner-button" id="banner-create">Create a post <span>↗</span></button>
+      </div>
+      <div class="banner-decoration">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="banner-letter">H</div>
+        <div class="floating-star">✦</div>
+        <div class="floating-circle"></div>
+      </div>
+    </section>
+
+    <!-- STORIES -->
+    <section class="stories-section">
+      <div class="section-heading">
+        <div>
+          <p class="section-eyebrow">DISCOVER PEOPLE</p>
+          <h2>Community</h2>
+        </div>
+        <span class="live-indicator">● YOUR SPACE</span>
+      </div>
+
+      <div class="community-strip">
+        <div class="community-card">
+          <div class="community-avatar avatar-purple">H</div>
+          <span>Heyo Community</span>
+        </div>
+        <div class="community-card">
+          <div class="community-avatar avatar-blue">✦</div>
+          <span>Explore</span>
+        </div>
+        <div class="community-card">
+          <div class="community-avatar avatar-pink">♡</div>
+          <span>Connections</span>
+        </div>
+        <div class="community-card">
+          <div class="community-avatar avatar-orange">✧</div>
+          <span>Moments</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEED -->
+    <section class="feed-section" id="feed">
+      <div class="section-heading feed-heading">
+        <div>
+          <p class="section-eyebrow">WHAT'S HAPPENING</p>
+          <h2>Your Feed</h2>
+        </div>
+        <select id="feed-sort">
+          <option value="latest">Latest posts</option>
+          <option value="popular">Popular</option>
+        </select>
+      </div>
+
+      <!-- CREATE POST -->
+      <section class="create-post-card" id="create-post">
+        <div class="create-post-top">
+          <div class="user-avatar" id="composer-avatar">G</div>
+          <button class="composer-input" id="composer-open">
+            What's on your mind?
+          </button>
+        </div>
+        <div class="create-post-bottom">
+          <span>✦ Share your thoughts with the community</span>
+          <button class="post-button" id="composer-submit">Create post +</button>
+        </div>
+      </section>
+
+      <!-- POSTS -->
+      <div id="posts-container">
+        <div class="loading-state">
+          <div class="loader"></div>
+          <p>Loading your community...</p>
+        </div>
+      </div>
+
+    </section>
+
+    <footer class="main-footer">
+      Made with <span>♥</span> for your social world. Heyo.
+    </footer>
+
+  </main>
+
+  <!-- RIGHT SIDEBAR -->
+  <aside class="right-sidebar">
+
+    <div class="right-profile-card">
+      <div class="right-profile-top">
+        <span class="online-dot"></span> YOUR ACCOUNT
+      </div>
+      <div class="right-avatar" id="right-avatar">G</div>
+      <h3 id="right-name">Welcome, Guest</h3>
+      <p id="right-username">@guest</p>
+      <button class="profile-edit-button" id="edit-profile">View Profile</button>
+      <div class="profile-stats">
+        <div><strong id="stat-posts">0</strong><span>Posts</span></div>
+        <div><strong id="stat-followers">0</strong><span>Followers</span></div>
+        <div><strong id="stat-following">0</strong><span>Following</span></div>
+      </div>
+    </div>
+
+    <div class="trending-card">
+      <div class="section-heading">
+        <div>
+          <p class="section-eyebrow">STAY CONNECTED</p>
+          <h3>About Heyo</h3>
+        </div>
+        <span>✦</span>
+      </div>
+      <p>Heyo is your space to connect, share your thoughts and discover new people.</p>
+      <div class="trending-item"><span>01</span> Express yourself</div>
+      <div class="trending-item"><span>02</span> Meet new people</div>
+      <div class="trending-item"><span>03</span> Share your moments</div>
+    </div>
+
+    <div class="login-card" id="login-card">
+      <h3>Join the conversation</h3>
+      <p>Sign in to like, comment and share posts.</p>
+      <button id="login-open">Log in to Heyo</button>
+    </div>
+
+  </aside>
+</div>
+
+
+<!-- AUTH DIALOG -->
+<dialog id="auth-dialog" class="modal">
+
+  <button class="modal-close" data-close="auth-dialog">×</button>
+
+  <div class="modal-brand">Heyo<span>.</span></div>
+
+  <p class="modal-eyebrow">YOUR SOCIAL SPACE</p>
+
+  <h2 id="auth-title">Welcome back!</h2>
+
+  <p class="modal-description" id="auth-description">
+    Log in to continue your journey.
+  </p>
+
+  <form id="auth-form">
+
+    <!-- REGISTRATION FIELDS -->
+    <div id="register-fields" hidden>
+
+      <label>Full Name</label>
+      <input
+        id="auth-name"
+        type="text"
+        placeholder="Enter your full name"
+        minlength="2"
+        maxlength="100"
+        autocomplete="name">
+
+      <label>Username</label>
+      <input
+        id="auth-username"
+        type="text"
+        placeholder="Choose a unique username"
+        minlength="3"
+        maxlength="50"
+        autocomplete="username">
+
+      <label>Choose Contact Method</label>
+
+      <select id="register-contact-method">
+        <option value="email">Email Address</option>
+        <option value="phone">Phone Number</option>
+      </select>
+
+      <div id="register-email-field">
+        <label>Email Address</label>
+        <input
+          id="auth-email"
+          type="email"
+          placeholder="yourname@example.com"
+          autocomplete="email">
+      </div>
+
+      <div id="register-phone-field" hidden>
+        <label>Phone Number</label>
+        <input
+          id="auth-phone"
+          type="tel"
+          placeholder="+8801XXXXXXXXX"
+          autocomplete="tel"
+          inputmode="tel">
+        <small>Include your country code, e.g. +880.</small>
+      </div>
+
+    </div>
+
+    <!-- LOGIN FIELD -->
+    <div id="login-identity-field">
+
+      <label>Email Address or Phone Number</label>
+
+      <input
+        id="auth-identity"
+        type="text"
+        placeholder="Enter email or phone number"
+        autocomplete="username"
+        required>
+
+    </div>
+
+    <!-- PASSWORD -->
+    <label>Password</label>
+
+    <input
+      id="auth-password"
+      type="password"
+      placeholder="Enter your password"
+      minlength="8"
+      autocomplete="current-password"
+      required>
+
+    <button
+      type="submit"
+      class="modal-submit"
+      id="auth-submit">
+      Log in
+    </button>
+
+    <p id="auth-message" class="form-message" role="status"></p>
+
+  </form>
+
+  <p class="auth-switch">
+    <span id="auth-switch-text">Don't have an account?</span>
+    <button id="auth-switch" type="button">
+      Create account
+    </button>
+  </p>
+
+</dialog>
+
+<!-- CREATE POST DIALOG -->
+<dialog id="post-dialog" class="modal">
+
+  <button class="modal-close" data-close="post-dialog">×</button>
+
+  <p class="modal-eyebrow">SHARE SOMETHING</p>
+  <h2>Create a post</h2>
+
+  <form id="post-form">
+
+    <textarea
+      id="post-content"
+      placeholder="What's on your mind?"
+      maxlength="5000">
+    </textarea>
+
+    <input id="post-image" type="hidden">
+    <input id="post-media-type" type="hidden" value="image">
+
+    <div class="heyo-upload-box post-media-upload">
+
+      <div class="post-media-buttons">
+
+        <input
+          id="post-image-file"
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          hidden>
+
+        <button
+          type="button"
+          class="upload-image-button"
+          onclick="document.getElementById('post-image-file').click()">
+          ✦ Add Photo
+        </button>
+
+        <input
+          id="post-video-file"
+          type="file"
+          accept="video/mp4,video/webm"
+          hidden>
+
+        <button
+          type="button"
+          class="upload-video-button"
+          onclick="document.getElementById('post-video-file').click()">
+          ▶ Add Video
+        </button>
+
+      </div>
+
+      <img
+        id="post-image-preview"
+        class="upload-preview"
+        alt="Post image preview"
+        hidden>
+
+      <video
+        id="post-video-preview"
+        class="upload-preview post-video-preview"
+        controls
+        playsinline
+        preload="metadata"
+        hidden>
+      </video>
+
+      <button
+        type="button"
+        id="remove-post-image"
+        class="remove-upload-button"
+        hidden>
+        Remove Media
+      </button>
+
+    </div>
+
+    <button class="modal-submit" type="submit">
+      Publish Post
+    </button>
+
+    <p id="post-message" class="form-message"></p>
+
+  </form>
+
+</dialog>
+
+<!-- PROFILE DIALOG -->
+<dialog id="profile-dialog" class="modal profile-modal">
+
+  <button class="modal-close" data-close="profile-dialog">×</button>
+
+  <!-- PROFILE VIEW MODE -->
+  <div id="profile-view" hidden>
+
+    <div class="profile-view-header">
+      <div>
+        <p class="modal-eyebrow">YOUR PROFILE</p>
+        <h2>My Profile</h2>
+      </div>
+
+      <button type="button" id="edit-profile-button"
+        class="profile-edit-small">
+        ✎ Edit
+      </button>
+    </div>
+
+    <div class="profile-view-content">
+
+      <img id="saved-profile-photo"
+        class="saved-profile-photo"
+        alt="Your Profile Photo"
+        hidden>
+
+      <div id="saved-profile-avatar"
+        class="saved-profile-avatar">H</div>
+
+      <h3 id="saved-profile-name">Your Name</h3>
+
+      <p id="saved-profile-username"></p>
+
+      <p id="saved-profile-bio">Your bio will appear here.</p>
+
+    </div>
+
+  </div>
+
+  <!-- PROFILE EDIT MODE -->
+  <div id="profile-edit-view">
+
+    <p class="modal-eyebrow">YOUR PROFILE</p>
+    <h2>Edit Profile</h2>
+
+    <form id="profile-form">
+
+      <label>Display Name</label>
+      <input id="profile-name"
+        type="text"
+        required
+        maxlength="100">
+
+      <label>Bio</label>
+      <textarea id="profile-bio"
+        maxlength="500"
+        placeholder="Tell people about yourself..."></textarea>
+
+      <label>Profile Photo</label>
+
+      <input id="profile-image" type="hidden">
+
+      <div class="heyo-upload-box">
+
+        <input
+          id="profile-image-file"
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          hidden>
+
+        <button type="button"
+          class="upload-image-button"
+          onclick="document.getElementById('profile-image-file').click()">
+          ✦ Choose Profile Photo
+        </button>
+
+        <img id="profile-image-preview"
+          class="upload-preview"
+          alt="Profile preview"
+          hidden>
+
+        <button type="button"
+          id="remove-profile-image"
+          class="remove-upload-button"
+          hidden>
+          Remove Photo
+        </button>
+
+      </div>
+
+      
+      <!-- COVER PHOTO UPLOAD -->
+      <label>Cover Photo</label>
+
+      <input id="profile-cover" type="hidden">
+
+      <div class="heyo-upload-box profile-cover-upload">
+
+        <input
+          id="profile-cover-file"
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          hidden>
+
+        <button type="button"
+          class="upload-image-button"
+          id="choose-cover-button">
+          ? Choose Cover Photo
+        </button>
+
+        <img id="profile-cover-preview"
+          class="upload-preview"
+          alt="Cover photo preview"
+          hidden>
+
+        <button type="button"
+          id="remove-profile-cover"
+          class="remove-upload-button"
+          hidden>
+          Remove Cover Photo
+        </button>
+
+      </div>
+
+<button class="modal-submit" type="submit">
+        Save Profile
+      </button>
+
+      <p id="profile-message" class="form-message"></p>
+
+    </form>
+
+  </div>
+
+  <button class="logout-button" id="logout-button">
+    Log out
+  </button>
+
+</dialog>
+
+
+<!-- COMMENTS DIALOG -->
+<dialog id="comments-dialog" class="modal comments-modal">
+
+  <button class="modal-close" data-close="comments-dialog">×</button>
+
+  <p class="modal-eyebrow">COMMUNITY DISCUSSION</p>
+  <h2>Comments</h2>
+
+  <div id="comments-list"></div>
+
+  <form id="comment-form">
+    <input id="comment-content"
+      placeholder="Write a comment..."
+      required
+      maxlength="2000">
+
+    <button class="modal-submit" type="submit">
+      Send
+    </button>
+  </form>
+
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>
